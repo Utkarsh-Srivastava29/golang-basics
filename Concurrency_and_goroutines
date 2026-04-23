@@ -1,0 +1,14 @@
+You are eating your food
+There is an instagram notification also
+You are also feeling hot
+
+Concurrency:-
+When we are allowed to switch to the tasks but doing only one task at a time then it is concurrency.
+Parallelism:-
+We are doing all the work at one time
+
+
+Go routine is the way how we achieve the parallelism.
+Threads are managed by OS.(Fixed stack)
+Goroutines are managed by go runtime.(Flexible stack)
+And since we can fire up more and more apis at a time hence it is very fast in case of go routine
