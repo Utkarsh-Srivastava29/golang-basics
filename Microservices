@@ -1,0 +1,313 @@
+Monolithic vs Microservices Architecture
+Backend systems ko design karne ke do common approaches hain: Monolithic Architecture aur Microservices Architecture. Dono ka goal application banana hota hai, lekin structure aur working style kaafi different hoti hai.
+
+1. Monolithic Architecture
+Definition
+Monolithic architecture ek aisa software architecture hai jahan poori application ek single unified codebase ke andar hoti hai. Saare modules — jaise authentication, payments, orders, products — ek hi application ka part hote hain aur ek saath develop, test aur deploy kiye jaate hain.
+Simple words me:
+Entire application = One big program
+Example
+Suppose aap ek e-commerce website bana rahe ho.
+Usme:
+
+
+User Login
+
+
+Product Catalog
+
+
+Shopping Cart
+
+
+Payment
+
+
+Order Management
+
+
+Agar ye sab ek hi project ke andar hain aur ek hi server par chal rahe hain, to ye monolithic architecture hai.
+Agar payment feature me ek chhota bug fix karna ho, tab bhi poori application dubara deploy karni padegi.
+Advantages
+Simple to Build
+Monolithic apps samajhna aur develop karna easy hota hai, especially small teams ke liye.
+Example:
+College project jaise Library Management System ek monolith me easily ban sakta hai.
+
+Easy Deployment
+Ek hi application deploy hoti hai, to deployment simple hota hai.
+
+Easy Debugging
+Sab ek hi codebase me hai, isliye issues trace karna easy hota hai.
+
+Disadvantages
+Entire Application Redeploy Karni Padti Hai
+Ek small change bhi poori application redeploy karwa sakta hai.
+Example:
+Sirf payment tax logic badla, phir bhi full app redeploy.
+
+Independent Scaling Nahi
+Agar sirf payment module pe zyada load hai, phir bhi poori app scale karni padegi.
+Ye inefficient hai.
+
+Tight Coupling
+Modules ek dusre par dependent ho jaate hain.
+Ek jagah change kabhi dusri functionality break kar sakta hai.
+
+2. Microservices Architecture
+Definition
+Microservices architecture me application ko chhote independent services me divide kar diya jata hai.
+Har service:
+
+
+apna codebase rakhti hai
+
+
+independently deploy hoti hai
+
+
+independently scale hoti hai
+
+
+specific business function handle karti hai
+
+
+Simple words me:
+Big application = Many small applications working together
+
+Example
+Same e-commerce app ko microservices me split kar sakte:
+
+
+Authentication Service
+
+
+Product Service
+
+
+Cart Service
+
+
+Payment Service
+
+
+Order Service
+
+
+Notification Service
+
+
+Ab har service independent hai.
+Agar payment service me change karna hai, sirf payment service deploy hogi.
+Baaki services untouched.
+
+Advantages
+Independent Deployment
+Har service separately deploy ho sakti hai.
+Example:
+UPI feature add karna hai.
+Sirf Payment Service deploy karni padegi.
+
+Independent Scaling
+Jis service pe load zyada ho sirf usko scale karo.
+Example:
+Sale ke time payment requests increase hui.
+Sirf payment service scale hogi.
+Puri application nahi.
+
+Loose Coupling
+Services independent hoti hain.
+Ek service fail bhi ho jaye to poori application necessarily down nahi hoti.
+
+Technology Flexibility
+Different services alag technologies use kar sakti hain.
+Example:
+Authentication Go me
+Recommendations Python me
+Payments Java me
+Best technology for each problem.
+
+Disadvantages
+High Complexity
+Manage karna harder.
+Multiple services, deployments, monitoring.
+
+More Infrastructure Cost
+More servers, networking, containers.
+Expensive ho sakta hai.
+
+Debugging Difficult
+Request multiple services cross karti hai.
+Issue trace karna harder.
+
+Communication Between Microservices
+Kyuki services independent hoti hain, unko communicate karna padta hai.
+Ye multiple ways se hota hai.
+
+1. API Calls
+Definition
+API calls synchronous communication hoti hain jahan ek service directly dusri service ko HTTP request bhejti hai.
+Request bhejo → response lo.
+Example
+Order Service payment process karne ke liye Payment Service ko call karti hai.
+Order place hua
+Payment Service ko request gayi
+Payment successful response aaya
+Ye direct communication hai.
+
+2. Message Broker
+Definition
+Message broker ek middleware hota hai jo services ke beech asynchronous communication enable karta hai.
+Services directly baat nahi karti.
+Messages broker ke through pass hote hain.
+Examples:
+
+
+RabbitMQ
+
+
+Apache Kafka
+
+
+Example
+Order place hua.
+Order Service ek message queue me message daalti hai:
+“Order placed”
+Notification Service baad me ye message consume karke email bhej deti hai.
+Immediate response ka wait nahi hota.
+
+3. Service Mesh
+Definition
+Service mesh ek infrastructure layer hoti hai jo microservices ke beech communication manage karti hai.
+Ye khud business logic nahi karta, bas communication control karta hai.
+Example tool:
+
+
+Istio
+
+
+Often used with:
+
+
+Kubernetes
+
+
+
+What Service Mesh Handles
+
+
+Service discovery
+
+
+Routing
+
+
+Load balancing
+
+
+Security
+
+
+Retries
+
+
+Monitoring
+
+
+
+Example
+Suppose 100 microservices hain.
+Agar ek service slow ho:
+Service mesh request reroute kar sakta hai.
+Agar secure communication chahiye:
+Service mesh encryption handle kar sakta hai.
+Developer ko manually manage nahi karna padta.
+
+Real World Usage
+Monolithic Examples
+Small startups often monolith se start karte hain.
+Frameworks often used for monolith:
+
+
+Django
+
+
+Ruby on Rails
+
+
+Laravel
+
+
+
+Microservices Examples
+Netflix
+Thousands of microservices.
+Video streaming, recommendations, billing separate services.
+
+Amazon
+Orders, payments, inventory independent services.
+
+Uber
+Pricing, maps, ride matching all separate services.
+
+When to Use What
+Use Monolithic When
+
+
+Small project
+
+
+Startup MVP
+
+
+Small team
+
+
+Fast development needed
+
+
+
+Use Microservices When
+
+
+Large scale systems
+
+
+High traffic
+
+
+Many teams
+
+
+Complex product
+
+
+
+Quick Comparison
+Monolithic
+One big application.
+Simple, cheap, easy to start.
+Harder to scale later.
+
+Microservices
+Many small independent services.
+Complex initially.
+Very scalable and flexible.
+
+Easy Analogy
+Monolithic
+Ek bada restaurant kitchen jahan same kitchen sab food bana rahi hai.
+Simple but crowded.
+
+Microservices
+Different specialist kitchens:
+Pizza kitchen
+Dessert kitchen
+Drinks kitchen
+Sab independently kaam karte hain but together restaurant run hota hai.
+
+Final Conclusion
+Small startups generally monolithic se start karti hain because simple hota hai.
+Jab scale aur complexity badhti hai tab companies microservices adopt karti hain.
+Monolith = Simplicity
+Microservices = Scalability
