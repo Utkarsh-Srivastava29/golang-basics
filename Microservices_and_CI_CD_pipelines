@@ -331,3 +331,438 @@ Small startups generally monolithic se start karti hain because simple hota hai.
 Jab scale aur complexity badhti hai tab companies microservices adopt karti hain.
 Monolith = Simplicity
 Microservices = Scalability
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CI/CD (Continuous Integration and Continuous Delivery)
+CI/CD is a core DevOps practice used to automate software development, testing, and deployment so applications can be delivered faster, more reliably, and with fewer errors.
+CI/CD mainly focuses on automating the Software Development Lifecycle (SDLC).
+
+What is SDLC (Software Development Lifecycle)?
+SDLC is the process followed to build and deliver software.
+Typical stages are:
+
+
+Requirement Analysis
+Understanding what needs to be built.
+
+
+Example: Building an e-commerce app with login, cart, and payment.
+
+
+
+Development / Coding
+Developers write code for features.
+
+
+Example:
+Frontend in React, backend in Node.js or Go.
+
+
+
+Version Control
+Code is stored and managed using version control systems like:
+
+
+
+
+Git
+
+
+GitHub
+
+
+Example:
+Developers push code changes to GitHub repository.
+
+
+
+Build Stage
+Source code is converted into deployable artifacts.
+
+
+Examples:
+
+
+Compiled binaries
+
+
+Docker images using Docker
+
+
+JAR/WAR files
+
+
+
+
+
+Testing
+Code is automatically tested.
+
+
+Examples:
+
+
+Unit testing
+
+
+Integration testing
+
+
+End-to-end testing
+
+
+Purpose:
+Catch bugs before deployment.
+
+
+
+Deployment
+Application is deployed to servers or cloud.
+
+
+Example:
+Deploying to AWS or Kubernetes cluster using Kubernetes.
+
+What is CI (Continuous Integration)?
+Continuous Integration means developers frequently merge code into a shared repository, and every change automatically triggers:
+
+
+Build
+
+
+Tests
+
+
+Validation
+
+
+Idea
+Every code commit is continuously integrated into the main codebase.
+
+Example
+Developer adds payment feature and pushes code.
+Automatically:
+
+
+Build starts
+
+
+Tests run
+
+
+Bugs detected early
+
+
+No manual effort.
+
+Why CI Needed?
+Without CI:
+Developers work separately for weeks.
+Then code merge karte waqt huge conflicts:
+This is called Integration Hell.
+CI prevents this.
+
+Benefits of CI
+
+
+Early bug detection
+
+
+Faster development
+
+
+Better code quality
+
+
+Easier collaboration
+
+
+Reduced integration problems
+
+
+
+What is CD (Continuous Delivery)
+Continuous Delivery means after build and testing, software is automatically prepared for release.
+Code is always production-ready.
+But deployment to production may need manual approval.
+
+Example
+Developer pushes code.
+Pipeline:
+Build → Test → Package → Staging Deployment
+Everything automatic.
+Production deployment waits for approval.
+
+Continuous Deployment
+Continuous Deployment is advanced version of Continuous Delivery.
+Difference:
+No manual approval.
+If tests pass:
+Automatically production deploy.
+
+Example
+Code pushed.
+Tests pass.
+System directly deploys new version to users.
+Fully automated.
+
+CI vs Continuous Delivery vs Continuous Deployment
+Continuous Integration
+Automates:
+
+
+Build
+
+
+Test
+
+
+Focus:
+Code integration.
+
+Continuous Delivery
+Automates:
+
+
+Build
+
+
+Test
+
+
+Release preparation
+
+
+Manual approval before production.
+
+Continuous Deployment
+Automates everything including production deployment.
+No manual step.
+
+Why CI/CD Important?
+Without CI/CD:
+Manual process:
+Developer writes code
+Manual build
+Manual testing
+Manual deployment
+Slow and error-prone.
+
+With CI/CD:
+Everything automated.
+Benefits:
+
+
+Faster releases
+
+
+Fewer bugs
+
+
+Reliable deployments
+
+
+Less manual work
+
+
+Frequent updates
+
+
+
+CI/CD Pipeline
+Typical pipeline:
+Code Commit
+→ Build
+→ Test
+→ Package
+→ Deploy to Staging
+→ Production
+This automated flow is called CI/CD Pipeline.
+
+CI/CD Tools
+GitHub Actions
+Built-in automation inside GitHub.
+Used to:
+
+
+Run tests
+
+
+Build apps
+
+
+Deploy automatically
+
+
+Example:
+Push to main branch triggers deployment.
+
+Jenkins
+Popular open-source CI/CD tool.
+Can automate:
+
+
+Builds
+
+
+Testing
+
+
+Deployments
+
+
+Very common in industry.
+
+Deployment Strategies
+Deploying new versions carefully is important to avoid downtime.
+
+1. Blue-Green Deployment
+Concept
+Maintain two identical environments:
+Blue → current live version
+Green → new version
+Traffic initially goes to Blue.
+Deploy new version to Green.
+Once verified:
+Switch traffic to Green.
+
+Example
+Version 1 running for users.
+Version 2 deployed separately.
+When stable:
+Users moved to Version 2 instantly.
+Zero downtime.
+
+Benefit
+Easy rollback.
+If issue:
+Switch back to Blue.
+
+2. Canary Deployment
+Concept
+New version gradually released to small percentage of users first.
+Example:
+5% users → new version
+If stable:
+20%
+50%
+100%
+
+Example
+Instagram releases new feature to limited users first.
+If bugs found:
+Stop rollout.
+
+Benefit
+Reduced risk.
+
+3. Rolling Deployment
+Concept
+Servers updated gradually one by one.
+Not all at once.
+
+Example
+10 application instances running.
+Update:
+Instance 1
+Then 2
+Then 3
+Until all updated.
+Old and new versions coexist temporarily.
+
+Benefit
+No downtime.
+
+Real World Example of CI/CD Flow
+Developer pushes code to GitHub.
+GitHub Actions pipeline starts:
+
+
+Code builds
+
+
+Tests run
+
+
+Docker image created
+
+
+Deploy to Kubernetes
+
+
+Rolling deployment updates production
+
+
+Entire process automated.
+That is CI/CD in action.
+
+Easy Analogy
+Suppose factory making cars.
+Without CI/CD:
+Manual assembly and inspection.
+Slow.
+
+With CI/CD:
+Automated assembly line.
+Fast, reliable, scalable.
+
+Final Summary
+Continuous Integration (CI)
+Automates code integration, building and testing.
+
+Continuous Delivery (CD)
+Automates release process, usually with approval before production.
+
+Continuous Deployment
+Automatically deploys to production without approval.
+
+Popular Tools
+
+
+Jenkins
+
+
+GitHub Actions
+
+
+
+Deployment Strategies
+
+
+Blue-Green Deployment
+
+
+Canary Deployment
+
+
+Rolling Deployment
+
+
+
+Core Idea
+CI/CD = Faster development + automated testing + safer deployments + reliable software delivery.
