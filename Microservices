@@ -1,3 +1,23 @@
+Apache Kafka
+Kafka is a distributed event-streaming/message-broker system used for asynchronous communication between services by publishing and consuming messages.
+Example: When an order is placed on an e-commerce app, Order Service sends an event to Kafka, and Notification Service and Inventory Service consume that event independently.
+
+Kubernetes
+Kubernetes is a container orchestration (coordination and automated management of containers) platform used to deploy, scale, manage, and automatically recover applications running in containers.
+Example: If traffic spikes during a sale, Kubernetes can automatically scale Payment Service containers from 5 to 50 instances and restart any container that crashes.
+
+
+
+
+
+
+
+
+
+
+
+
+
 Monolithic vs Microservices Architecture
 Backend systems ko design karne ke do common approaches hain: Monolithic Architecture aur Microservices Architecture. Dono ka goal application banana hota hai, lekin structure aur working style kaafi different hoti hai.
 
