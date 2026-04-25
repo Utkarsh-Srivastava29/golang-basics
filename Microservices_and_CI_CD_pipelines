@@ -5,6 +5,374 @@ Example: When an order is placed on an e-commerce app, Order Service sends an ev
 Kubernetes
 Kubernetes is a container orchestration (coordination and automated management of containers) platform used to deploy, scale, manage, and automatically recover applications running in containers.
 Example: If traffic spikes during a sale, Kubernetes can automatically scale Payment Service containers from 5 to 50 instances and restart any container that crashes.
+(
+Introduction to Kubernetes (K8s)
+Kubernetes (or K8s) is an open-source platform used to deploy, manage, scale and automate containerized applications.
+1. What is Container Orchestration?
+Suppose your application runs in containers (for example using Docker).
+One or two containers can be managed manually, but real applications may have hundreds or thousands of containers.
+Container Orchestration means automatically managing those containers:
+
+
+Where they should run
+
+
+How many copies should run
+
+
+Restart them if they fail
+
+
+Scale them when traffic increases
+
+
+Connect them with each other
+
+
+Analogy:
+Like an orchestra has many musicians and one conductor controls everyone, Kubernetes acts as the conductor for containers.
+Without orchestration:
+
+
+Manual deployments
+
+
+Manual scaling
+
+
+Server failures cause downtime
+
+
+With Kubernetes:
+
+
+Automated management
+
+
+High availability
+
+
+Self-healing systems
+
+
+
+2. Why Kubernetes Needed?
+Suppose your website suddenly gets huge traffic.
+Problem 1: Traffic Spike
+One server may crash under heavy load.
+Kubernetes can:
+
+
+Start more copies of your app (scaling)
+
+
+Distribute users among them (load balancing)
+
+
+Example:
+
+
+1 server handles 1000 users
+
+
+10,000 users arrive
+
+
+Kubernetes can run 10 instances automatically.
+
+
+
+Problem 2: Server Failure
+Suppose a machine dies.
+Normally:
+
+
+App goes down.
+
+
+With Kubernetes:
+
+
+It detects failed containers.
+
+
+Starts new ones automatically.
+
+
+This is called Self-Healing.
+
+3. Kubernetes Architecture
+Kubernetes works on Master-Worker model.
+(A) Master Node / Control Plane
+This is the “brain”.
+It doesn’t run your app usually—
+it controls everything.
+API Server
+Main entry point of Kubernetes.
+Whatever command you run:
+kubectl apply -f app.yaml
+goes to API server.
+It receives requests and tells cluster what to do.
+Think:
+
+
+Front door of Kubernetes.
+
+
+
+etcd
+Distributed key-value database.
+Stores:
+
+
+Cluster state
+
+
+Configurations
+
+
+Running pods
+
+
+Secrets
+
+
+Everything important
+
+
+Think:
+
+
+Kubernetes memory/database.
+
+
+If etcd gone → cluster in trouble.
+
+Controller Manager
+Controllers keep desired state = actual state.
+Example:
+You say:
+“I want 3 pods running”
+If one dies:
+
+
+Controller notices only 2 running
+
+
+Starts 1 new pod.
+
+
+Maintains desired state.
+
+Scheduler
+Decides:
+Which worker node should run a pod?
+It checks:
+
+
+CPU
+
+
+Memory
+
+
+Available resources
+
+
+Like assigning students to classrooms.
+
+(B) Worker Nodes
+These do the real work.
+Applications run here.
+
+Kubelet
+Agent on every worker node.
+It:
+
+
+Talks to master
+
+
+Makes sure pods run
+
+
+Restarts failed containers
+
+
+Like node supervisor.
+
+Kube Proxy
+Handles networking.
+Responsible for:
+
+
+Routing traffic
+
+
+Service communication
+
+
+Load balancing inside cluster
+
+
+Like traffic police.
+
+Container Runtime
+Software that actually runs containers.
+Examples:
+
+
+Docker
+
+
+containerd
+
+
+CRI-O
+
+
+Without runtime containers can’t execute.
+
+4. Pod (Most Important)
+Smallest deployable unit in Kubernetes.
+Not container directly—
+Kubernetes deploys Pods, not raw containers.
+A Pod can contain:
+
+
+One container (common)
+
+
+Multiple tightly coupled containers
+
+
+
+Why Pod?
+Because containers sometimes need helpers.
+Example:
+Main app container
+
+
+logging sidecar container
+
+
+Both in same pod.
+They can:
+
+
+Share network
+
+
+Share storage
+
+
+Talk via localhost
+
+
+
+5. Important Features
+Scalability
+Increase/decrease instances automatically.
+2 pods → 20 pods when traffic grows.
+
+Zero Downtime
+Update app without shutting service.
+Users keep using app.
+Called Rolling Updates.
+
+Rollback
+New version broken?
+Return to old version instantly.
+
+Self Healing
+If container crashes:
+
+
+restart
+
+
+If node dies:
+
+
+move workload elsewhere
+
+
+
+6. YAML Configuration
+Kubernetes resources are often defined in YAML.
+Example:
+apiVersion: v1kind: Podmetadata:  name: myappspec:  containers:  - name: app    image: nginx
+Explanation:
+apiVersion
+
+
+Kubernetes API version
+
+
+kind
+
+
+What object you're creating
+(Pod, Deployment, Service etc.)
+
+
+metadata
+
+
+Information like name
+
+
+spec
+
+
+Desired configuration
+
+
+containers
+
+
+Which container image to run
+
+
+image: nginx
+Uses Nginx container.
+Apply:
+kubectl apply -f app.yaml
+Kubernetes creates it.
+
+Full Flow
+You write YAML
+↓
+Send with kubectl
+↓
+API Server receives it
+↓
+Scheduler chooses worker node
+↓
+Kubelet starts pod
+↓
+Container runtime runs container
+↓
+Kube Proxy exposes networking
+↓
+Controllers keep everything healthy
+Whole system works together.
+
+One-line Summary
+Docker packages applications into containers. Kubernetes manages those containers at scale.
+
+
+Docker = creates containers
+
+
+Kubernetes = manages containers
+
+
+(Ye bahut important interview line hai.)
+Agar chaho next Pods, Deployment, Service, ReplicaSet bhi clear kar sakta hoon jo Kubernetes ka core hai.
+)
+
+
 
 
 
